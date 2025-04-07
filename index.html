@@ -101,25 +101,33 @@
         const fileList = document.getElementById('file-list');
         const content = document.getElementById('content');
 
-        // 获取pages目录下的所有.md文件
-        async function getMarkdownFiles() {
-            try {
-                const response = await fetch('pages/');
-                if (!response.ok) throw new Error('Failed to fetch directory listing');
-                const text = await response.text();
-                // 解析目录页面中的链接
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(text, 'text/html');
-                const links = Array.from(doc.querySelectorAll('a'));
-                // 过滤出.md文件
-                return links
-                    .map(link => link.getAttribute('href'))
-                    .filter(href => href && href.endsWith('.md'))
-                    .map(href => decodeURIComponent(href));
-            } catch (error) {
-                console.error('Error loading file list:', error);
-                return [];
-            }
+        // 预定义Markdown文件列表
+        function getMarkdownFiles() {
+            return [
+                'example.md',
+                '1_快速二分查找.md',
+                '2_lower_bound：第一个_=x的位置，那upper_bound呢_.md',
+                '3_学校分分数线与不满意度（二分）.md',
+                '4_砍木头.md',
+                '5_双指针：最长不重复子串.md',
+                '6_双指针加前缀和——合并数列.md',
+                '7_最大堆与最小堆.md',
+                '8_并查集.md',
+                '9_单调栈.md',
+                '10_分解质因数.md',
+                '11_素数环：素数➕深度优先搜索.md',
+                '12_快速幂，b^p % k.md',
+                '13_C(n,m)组合数.md',
+                '14_排列型枚举dfs.md',
+                '15_指数型枚举.md',
+                '16_组合型枚举.md',
+                '17_贪心加动态规划.md',
+                '18_最少操作数，bfs.md',
+                '19_01背包问题，内层逆序！.md',
+                '20_完全背包问题，内层正序.md',
+                '21_多重背包1，内层逆序.md',
+                'sum.md'
+            ];
         }
 
         // 创建文件列表
@@ -144,13 +152,21 @@
         // 加载Markdown文件
         function loadMarkdown(filename) {
             fetch('pages/' + filename)
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
                 .then(text => {
+                    if (!text.trim()) {
+                        throw new Error('文件内容为空');
+                    }
                     content.innerHTML = marked.parse(text);
                 })
                 .catch(error => {
-                    console.error('Error loading markdown:', error);
-                    content.innerHTML = '<p>Error loading content.</p>';
+                    console.error('加载Markdown文件时出错:', error);
+                    content.innerHTML = `<p>加载文件 "${filename}" 时出错。请确保文件存在且不为空。</p>`;
                 });
         }
 
