@@ -1,0 +1,34 @@
+## 13.快速幂，b^p % k
+```
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll quick_power(ll base, ll power, ll k)
+{
+    // result = b^p % k
+    // (a*b)%k = [(a%k)*(b%k)]%k
+    ll result = 1;
+    while(power)
+    {
+        if(power%2==1)// power是奇数时
+        {
+            power--;
+            // result = result * b % k
+            result = result * base % k;
+        }
+        // 此时 power 一定是偶数
+        power /= 2;
+        // base = base^2 % k
+        // b^p, (b^2)^(power/2),效果一样，而且更快
+        base = base*base%k;
+    }
+    return result;
+}
+int main()
+{
+    ll b,p,k;
+    cin>>b>>p>>k;
+    cout<<quick_power(b,p,k)<<endl;
+    return 0;
+}
+```
