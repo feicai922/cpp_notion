@@ -100,19 +100,50 @@
     <script>
         const fileList = document.getElementById('file-list');
         const content = document.getElementById('content');
-        const mdFiles = ['content.md', 'code.md'];
+
+        // 获取pages目录下的所有.md文件
+        async function getMarkdownFiles() {
+            try {
+                const response = await fetch('pages/');
+                if (!response.ok) throw new Error('Failed to fetch directory listing');
+                const text = await response.text();
+                // 解析目录页面中的链接
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+                const links = Array.from(doc.querySelectorAll('a'));
+                // 过滤出.md文件
+                return links
+                    .map(link => link.getAttribute('href'))
+                    .filter(href => href && href.endsWith('.md'))
+                    .map(href => decodeURIComponent(href));
+            } catch (error) {
+                console.error('Error loading file list:', error);
+                return [];
+            }
+        }
 
         // 创建文件列表
-        mdFiles.forEach(file => {
-            const li = document.createElement('li');
-            li.textContent = file;
-            li.onclick = () => loadMarkdown(file);
-            fileList.appendChild(li);
-        });
+        async function initializeFileList() {
+            const mdFiles = await getMarkdownFiles();
+            fileList.innerHTML = '';
+            mdFiles.forEach(file => {
+                const li = document.createElement('li');
+                // 显示文件名时去掉.md扩展名
+                li.textContent = file.replace('.md', '');
+                li.onclick = () => loadMarkdown(file);
+                fileList.appendChild(li);
+            });
+            // 如果有文件，加载第一个
+            if (mdFiles.length > 0) {
+                loadMarkdown(mdFiles[0]);
+            } else {
+                content.innerHTML = '<p>没有找到Markdown文件。请将.md文件放入pages文件夹中。</p>';
+            }
+        }
 
         // 加载Markdown文件
         function loadMarkdown(filename) {
-            fetch(filename)
+            fetch('pages/' + filename)
                 .then(response => response.text())
                 .then(text => {
                     content.innerHTML = marked.parse(text);
@@ -123,10 +154,8 @@
                 });
         }
 
-        // 默认加载第一个文件
-        if (mdFiles.length > 0) {
-            loadMarkdown(mdFiles[0]);
-        }
+        // 初始化文件列表
+        initializeFileList();
     </script>
 </body>
 </html>
