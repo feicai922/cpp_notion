@@ -22,7 +22,6 @@
             display: flex;
             min-height: 100vh;
             background-color: var(--content-bg);
-            overflow: hidden;
         }
         #sidebar {
             width: 280px;
@@ -31,20 +30,6 @@
             border-right: none;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            height: 100vh;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-color) var(--sidebar-bg);
-        }
-        #sidebar::-webkit-scrollbar {
-            width: 8px;
-        }
-        #sidebar::-webkit-scrollbar-track {
-            background: var(--sidebar-bg);
-        }
-        #sidebar::-webkit-scrollbar-thumb {
-            background-color: var(--primary-color);
-            border-radius: 4px;
         }
         #sidebar h2 {
             margin-top: 0;
@@ -75,20 +60,7 @@
         #main-content {
             flex: 1;
             padding: 30px;
-            height: 100vh;
             overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-color) var(--content-bg);
-        }
-        #main-content::-webkit-scrollbar {
-            width: 8px;
-        }
-        #main-content::-webkit-scrollbar-track {
-            background: var(--content-bg);
-        }
-        #main-content::-webkit-scrollbar-thumb {
-            background-color: var(--primary-color);
-            border-radius: 4px;
         }
         #content {
             background: #fff;
@@ -184,10 +156,29 @@
         // 预定义Markdown文件列表
         function getMarkdownFiles() {
             return [
-                '随堂练习0320.md',
-                '随堂练习0325.md',
-                '随堂练习0327.md',
-                '随堂练习0401.md'
+                'example.md',
+                '1_快速二分查找.md',
+                '2_lower_bound：第一个_=x的位置，那upper_bound呢_.md',
+                '3_学校分数线与不满意度.md',
+                '4_砍木头.md',
+                '5_双指针：最长不重复子串.md',
+                '6_双指针加前缀和——合并数列.md',
+                '7_最大堆与最小堆.md',
+                '8_并查集.md',
+                '9_单调栈.md',
+                '10_分解质因数.md',
+                '11_素数环：素数➕深度优先搜索.md',
+                '12_快速幂.md',
+                '13_C(n,m)组合数.md',
+                '14_排列型枚举dfs.md',
+                '15_指数型枚举.md',
+                '16_组合型枚举.md',
+                '17_贪心加动态规划.md',
+                '18_最少操作数，bfs.md',
+                '19_01背包问题，内层逆序！.md',
+                '20_完全背包问题，内层正序.md',
+                '21_多重背包1，内层逆序.md',
+                'sum.md'
             ];
         }
 
