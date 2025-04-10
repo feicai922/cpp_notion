@@ -22,6 +22,7 @@
             display: flex;
             min-height: 100vh;
             background-color: var(--content-bg);
+            overflow: hidden;
         }
         #sidebar {
             width: 280px;
@@ -30,6 +31,20 @@
             border-right: none;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            height: 100vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--sidebar-bg);
+        }
+        #sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        #sidebar::-webkit-scrollbar-track {
+            background: var(--sidebar-bg);
+        }
+        #sidebar::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 4px;
         }
         #sidebar h2 {
             margin-top: 0;
@@ -60,7 +75,20 @@
         #main-content {
             flex: 1;
             padding: 30px;
+            height: 100vh;
             overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--content-bg);
+        }
+        #main-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        #main-content::-webkit-scrollbar-track {
+            background: var(--content-bg);
+        }
+        #main-content::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 4px;
         }
         #content {
             background: #fff;
