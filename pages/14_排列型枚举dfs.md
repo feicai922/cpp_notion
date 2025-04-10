@@ -1,5 +1,5 @@
 ## 15.排列型枚举dfs
-```
+```cpp
 #include<bits/stdc++.h>
 using namespace std;
 const int N = 8;

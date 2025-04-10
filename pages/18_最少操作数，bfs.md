@@ -1,5 +1,5 @@
 ## 19.最少操作数，bfs
-```
+```cpp
 // n+1,n-1,n*2,通过最少的操作次数变成k
 #include<bits/stdc++.h>
 using namespace std;

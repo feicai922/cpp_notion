@@ -1,5 +1,5 @@
 ## 2.lower_bound：第一个>=x的位置，那upper_bound呢?
-```
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 

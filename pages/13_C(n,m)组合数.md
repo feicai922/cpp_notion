@@ -1,5 +1,5 @@
 ## 14.C(n,m)组合数
-```
+```cpp
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
