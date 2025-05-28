@@ -119,6 +119,7 @@ ll urdf
 vi urdf/small_car.urdf
 
 [Code 001]:
+
 ```
 <?xml version=“1.0”?>
 
@@ -131,6 +132,7 @@ vi urdf/small_car.urdf
 4.在URDF描述文件中添加小车车身配置，用link节点标记。内容包括形状（方形），尺寸（长宽高单位cm），初始角度（单位π），颜色（颜色数值/255）。
 
 [Code 002]:
+
 ```
 <link name="base_link">
     <visual>
@@ -149,6 +151,7 @@ vi urdf/small_car.urdf
 5.在URDF描述文件中添加四个车轮，用link节点标记。包括形状（圆柱），尺寸（高度和半径），颜色。
 
 [Code 003]:
+
 ```
 <link name="right_front_wheel">
     <visual>
@@ -199,6 +202,7 @@ vi urdf/small_car.urdf
 6.在URDF描述文件中添加车轮与车身的连接设置，用joint节点标记。包括连接性质（continuous连续型连接关节，可以绕一个轴旋转），旋转轴设置（沿z轴旋转），连接物体parent车体、child轮子、方向、位置，以及力、速度、摩擦等属性（基础操作使用默认参数即可）。
 
 [Code 004]:
+
 ```
 <joint name="right_front_wheel_joint" type="continuous">
     <axis xyz="0 0 1"/>
@@ -251,6 +255,7 @@ vi urdf/small_car.urdf
 vi launch/car_urdf.launch
 
 [Code 005]:
+
 ```
 <launch>
     <!-- 定义参数 -->
